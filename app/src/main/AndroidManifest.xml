@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ory.diy.ontop">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,8 @@
         <activity android:name=".SplashActivity"
             android:theme="@style/Splash.Theme.OnTop">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:configChanges="uiMode"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

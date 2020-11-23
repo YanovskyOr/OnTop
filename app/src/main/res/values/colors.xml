@@ -7,4 +7,42 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="color_on_top_primary_blue">#4472C4</color>
+    <color name="color_on_top_primary_dark_blue">#1E478F</color>
+
+
+
+<!--pale colors-->
+<!--    <color name="color_on_top_blue">#B4C7E7</color>-->
+<!--    <color name="color_on_top_green">#C5E0B4</color>-->
+<!--    <color name="color_on_top_yellow">#FFE699</color>-->
+<!--    <color name="color_on_top_orange">#F8CBAD</color>-->
+<!--    <color name="color_on_top_red">#F8ADAD</color>-->
+
+
+<!--normal colors    -->
+    <color name="color_on_top_blue">#8EAADB</color>
+    <color name="color_on_top_green">#A8D08D</color>
+    <color name="color_on_top_yellow">#FFD965</color>
+    <color name="color_on_top_orange">#F6A36A</color>
+    <color name="color_on_top_red">#F86868</color>
+
+<!--dark colors-->
+    <!--    <color name="color_on_top_blue">#2F5597</color>-->
+    <!--    <color name="color_on_top_green">#548235</color>-->
+    <!--    <color name="color_on_top_yellow">#BF9000</color>-->
+    <!--    <color name="color_on_top_orange">#C55A11</color>-->
+    <!--    <color name="color_on_top_red">#C52C11</color>-->
+
+
+
+    <color name="color_panel_background">#0D000000</color>
+    <color name="color_darken">#19000000</color>
+
+
+
+
+
 </resources>
