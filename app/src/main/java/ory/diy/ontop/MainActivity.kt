@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import ory.diy.ontop.model.TaskBlock
-import ory.diy.ontop.model.ToDoListTask
+import ory.diy.ontop.model.*
 import ory.diy.ontop.preferences.MyPreferences
+import ory.diy.ontop.viewmodel.PlanesAdapter
 import ory.diy.ontop.viewmodel.TaskBlockAdapter
 import ory.diy.ontop.viewmodel.ToDoListAdapter
 import java.util.*
@@ -16,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-
+    private var planesList: ArrayList<IPlane>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,24 +32,32 @@ class MainActivity : AppCompatActivity() {
         ib_dark_mode.setOnClickListener {
             chooseThemeDialog()
         }
-
-//        rv_task_blocks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val taskBlockItemAdapter = TaskBlockAdapter(this, getTaskBlockList())
-        rv_task_blocks.adapter = taskBlockItemAdapter
-
         setTopGreeting()
 
-        val toDoListItemAdapter = ToDoListAdapter(this, getToDoList())
-        rv_task_list.adapter = toDoListItemAdapter
+//        rv_task_blocks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        val taskBlockItemAdapter = TaskBlockAdapter(this, getTaskBlockList())
+//        rv_task_blocks.adapter = taskBlockItemAdapter
+//
+//        val toDoListItemAdapter = ToDoListAdapter(this, getToDoList())
+//        rv_task_list.adapter = toDoListItemAdapter
+
+        planesList = getPlanesList()
+        val planesItemAdapter =  PlanesAdapter(this, planesList!!)
+        rv_planes.adapter = planesItemAdapter
+
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(rv_planes)
 
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+//        menuInflater.inflate(R.menu.menu_main, menu)
+//        return true
+//    }
+
+
 
     private fun checkTheme() {
         when (MyPreferences(this).darkMode) {
@@ -102,6 +112,42 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private var simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),0){
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            var startPosition = viewHolder.adapterPosition
+            var endPosition = target.adapterPosition
+
+            Collections.swap(planesList, startPosition, endPosition)
+            rv_planes.adapter?.notifyItemMoved(startPosition, endPosition)
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+        }
+
+    }
+
+
+    fun getPlanesList() : ArrayList<IPlane>{
+        val planesArrayList = ArrayList<IPlane>()
+
+        val taskBlocksPlane = TaskBlocksPlane("Daily", getTaskBlockList())
+        val toDoListPlane = ToDoListPlane("To Do", getToDoList())
+        val taskBlocksPlane2 = TaskBlocksPlane("Daily2", getTaskBlockList())
+        val toDoListPlane2 = ToDoListPlane("To Do2", getToDoList())
+        val toDoListPlane3 = ToDoListPlane("To Do3", getToDoList())
+
+        planesArrayList.add(taskBlocksPlane)
+        planesArrayList.add(toDoListPlane)
+        planesArrayList.add(taskBlocksPlane2)
+        planesArrayList.add(toDoListPlane2)
+        planesArrayList.add(toDoListPlane3)
+
+
+
+        return planesArrayList
+    }
 
 
     private fun getTaskBlockList(): ArrayList<TaskBlock> {

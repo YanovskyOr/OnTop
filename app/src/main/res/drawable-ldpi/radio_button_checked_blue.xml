@@ -14,12 +14,12 @@
         </shape>
     </item>
 
-    <item>
-        <shape android:shape="oval">
-            <size
-                android:width="40dp"
-                android:height="40dp" />
-            <solid android:color="@color/color_darken_more" />
-        </shape>
-    </item>
+<!--    <item>-->
+<!--        <shape android:shape="oval">-->
+<!--            <size-->
+<!--                android:width="40dp"-->
+<!--                android:height="40dp" />-->
+<!--            <solid android:color="@color/color_darken_more" />-->
+<!--        </shape>-->
+<!--    </item>-->
 </layer-list>
