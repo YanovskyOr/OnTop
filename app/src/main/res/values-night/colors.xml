@@ -18,8 +18,9 @@
     <color name="color_on_top_orange">#F8CBAD</color>
     <color name="color_on_top_red">#F8ADAD</color>
 
-    <color name="color_panel_background">#0FFFFFFF</color>
+    <color name="color_panel_background">#07FFFFFF</color>
     <color name="color_darken">#19000000</color>
+    <color name="color_darken_more">#3E000000</color>
 
 
 

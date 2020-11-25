@@ -5,12 +5,12 @@
         android:state_checked="false">
         <shape android:shape="oval">
             <corners android:radius="30dp"/>
-            <solid android:color="@color/color_darken"/>
+            <solid android:color="@color/color_on_top_blue"/>
         </shape>
     </item>
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/radio_button_checked">
+        android:drawable="@drawable/radio_button_checked_blue">
     </item>
 </selector>

@@ -15,19 +15,19 @@
 
 
 <!--pale colors-->
-<!--    <color name="color_on_top_blue">#B4C7E7</color>-->
-<!--    <color name="color_on_top_green">#C5E0B4</color>-->
-<!--    <color name="color_on_top_yellow">#FFE699</color>-->
-<!--    <color name="color_on_top_orange">#F8CBAD</color>-->
-<!--    <color name="color_on_top_red">#F8ADAD</color>-->
+    <color name="color_on_top_blue">#B4C7E7</color>
+    <color name="color_on_top_green">#C5E0B4</color>
+    <color name="color_on_top_yellow">#FFE699</color>
+    <color name="color_on_top_orange">#F8CBAD</color>
+    <color name="color_on_top_red">#F8ADAD</color>
 
 
 <!--normal colors    -->
-    <color name="color_on_top_blue">#8EAADB</color>
-    <color name="color_on_top_green">#A8D08D</color>
-    <color name="color_on_top_yellow">#FFD965</color>
-    <color name="color_on_top_orange">#F6A36A</color>
-    <color name="color_on_top_red">#F86868</color>
+<!--    <color name="color_on_top_blue">#8EAADB</color>-->
+<!--    <color name="color_on_top_green">#A8D08D</color>-->
+<!--    <color name="color_on_top_yellow">#FFD965</color>-->
+<!--    <color name="color_on_top_orange">#F6A36A</color>-->
+<!--    <color name="color_on_top_red">#F86868</color>-->
 
 <!--dark colors-->
     <!--    <color name="color_on_top_blue">#2F5597</color>-->
@@ -38,8 +38,9 @@
 
 
 
-    <color name="color_panel_background">#0D000000</color>
+    <color name="color_panel_background">#07000000</color>
     <color name="color_darken">#19000000</color>
+    <color name="color_darken_more">#3E000000</color>
 
 
 

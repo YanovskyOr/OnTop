@@ -6,11 +6,11 @@
                 android:width="40dp"
                 android:height="40dp" />
             <padding
-                android:bottom="6dp"
-                android:left="6dp"
-                android:right="6dp"
-                android:top="6dp" />
-            <solid android:color="@color/color_darken"/>
+                android:bottom="5dp"
+                android:left="5dp"
+                android:right="5dp"
+                android:top="5dp" />
+            <solid android:color="@color/color_on_top_blue"/>
         </shape>
     </item>
 
