@@ -2,23 +2,31 @@ package ory.diy.ontop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_note_plane.ib_title_handle_note
+import kotlinx.android.synthetic.main.item_note_plane.view.*
+import kotlinx.android.synthetic.main.item_task_blocks_plane.*
+import kotlinx.android.synthetic.main.item_task_blocks_plane.view.*
+import kotlinx.android.synthetic.main.item_to_do_list_plane.*
+import kotlinx.android.synthetic.main.item_to_do_list_plane.view.*
 import ory.diy.ontop.model.*
 import ory.diy.ontop.preferences.MyPreferences
 import ory.diy.ontop.viewmodel.PlanesAdapter
-import ory.diy.ontop.viewmodel.TaskBlockAdapter
-import ory.diy.ontop.viewmodel.ToDoListAdapter
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     private var planesList: ArrayList<IPlane>? = null
+    private var isEditMode = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -45,10 +53,13 @@ class MainActivity : AppCompatActivity() {
         val planesItemAdapter =  PlanesAdapter(this, planesList!!)
         rv_planes.adapter = planesItemAdapter
 
-        val itemTouchHelper = ItemTouchHelper(simpleCallback)
-        itemTouchHelper.attachToRecyclerView(rv_planes)
-
+        //EDIT MODE
+        ib_edit_mode.setOnClickListener {
+            editMode()
+        }
     }
+
+
 
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -78,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun chooseThemeDialog() {
 
-        val builder = AlertDialog.Builder(this, R.style.DialogAlert_Style_OnTop)
+        val builder = MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_OnTop_MaterialAlertDialog)
         builder.setTitle("Choose Theme")
         val styles = arrayOf("Light", "Dark", "System default")
         val checkedItem = MyPreferences(this).darkMode
@@ -117,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             var startPosition = viewHolder.adapterPosition
             var endPosition = target.adapterPosition
 
-            Collections.swap(planesList, startPosition, endPosition)
+            Collections.swap(planesList!!, startPosition, endPosition)
             rv_planes.adapter?.notifyItemMoved(startPosition, endPosition)
             return true
         }
@@ -127,23 +138,22 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    private val itemTouchHelper = ItemTouchHelper(simpleCallback)
 
 
     fun getPlanesList() : ArrayList<IPlane>{
         val planesArrayList = ArrayList<IPlane>()
 
         val taskBlocksPlane = TaskBlocksPlane("Daily", getTaskBlockList())
-        val toDoListPlane = ToDoListPlane("To Do", getToDoList())
-        val taskBlocksPlane2 = TaskBlocksPlane("Daily2", getTaskBlockList())
-        val toDoListPlane2 = ToDoListPlane("To Do2", getToDoList())
-        val toDoListPlane3 = ToDoListPlane("To Do3", getToDoList())
+        val notePlane = NotePlane("Extremely Important!", "Send report today!", NotePlane.NOTE_COLOR_ORANGE)
+        val toDoListPlane = ToDoListPlane("Focus Today", getToDoList())
+        val toDoListPlane2 = ToDoListPlane("Do Tomorrow", getToDoList2())
+
 
         planesArrayList.add(taskBlocksPlane)
+        planesArrayList.add(notePlane)
         planesArrayList.add(toDoListPlane)
-        planesArrayList.add(taskBlocksPlane2)
         planesArrayList.add(toDoListPlane2)
-        planesArrayList.add(toDoListPlane3)
-
 
 
         return planesArrayList
@@ -155,14 +165,23 @@ class MainActivity : AppCompatActivity() {
 
         var task1 = TaskBlock("Make bed", 1, TaskBlock.TASK_COLOR_GREEN)
         var task2 = TaskBlock("Reset Workspace", 1, TaskBlock.TASK_COLOR_YELLOW)
-        var task3 = TaskBlock("Workout", 1, TaskBlock.TASK_COLOR_RED)
-        var task4 = TaskBlock("Drink Water", 9)
+        var task3 = TaskBlock("Drink Water", 9)
+        var task4 = TaskBlock("Workout", 1, TaskBlock.TASK_COLOR_RED)
+        var task5 = TaskBlock("Do thing 5", 1, TaskBlock.TASK_COLOR_CYAN)
+        var task6 = TaskBlock("Do thing 6", 1, TaskBlock.TASK_COLOR_PURPLE)
+        var task7 = TaskBlock("Do multiple things", 7, TaskBlock.TASK_COLOR_PINK)
+        var task8 = TaskBlock("Do thing 8", 1, TaskBlock.TASK_COLOR_ORANGE)
+
 
 
         taskBlockArrayList.add(task1)
         taskBlockArrayList.add(task2)
         taskBlockArrayList.add(task3)
         taskBlockArrayList.add(task4)
+        taskBlockArrayList.add(task5)
+        taskBlockArrayList.add(task6)
+        taskBlockArrayList.add(task7)
+        taskBlockArrayList.add(task8)
 
         return taskBlockArrayList
     }
@@ -184,6 +203,19 @@ class MainActivity : AppCompatActivity() {
         return toDoListArrayList
     }
 
+    private fun getToDoList2() : ArrayList<ToDoListTask> {
+        val toDoListArrayList = ArrayList<ToDoListTask>()
+
+        var task1 = ToDoListTask("Work on app")
+        var task2 = ToDoListTask("Send email")
+
+        toDoListArrayList.add(task1)
+        toDoListArrayList.add(task2)
+
+        return toDoListArrayList
+    }
+
+
     private fun setTopGreeting() {
         var calendar = Calendar.getInstance()
         var timeOfDay = calendar.get(Calendar.HOUR_OF_DAY)
@@ -196,6 +228,50 @@ class MainActivity : AppCompatActivity() {
             in 12..15 -> tv_greeting.text = "Good Afternoon"
             in 16..20 -> tv_greeting.text = "Good Evening"
             in 21..23 -> tv_greeting.text = "Good Night"
+        }
+    }
+
+    private fun editMode(){
+        //edit mode disabled
+        if(isEditMode){
+            isEditMode = false
+
+            try {
+                var i = 0
+                do{
+                    var type = (rv_planes.adapter as PlanesAdapter).getItemViewType(i)
+                    when(type){
+                        0 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_task_blocks?.background = getDrawable(R.color.color_on_top_primary_blue)
+                        1 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_to_do_list?.background = getDrawable(R.color.color_on_top_primary_blue)
+                        2 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_note?.background = getDrawable(R.color.color_on_top_primary_blue)
+                    }
+                    i++
+                }while(i < rv_planes.layoutManager!!.childCount)
+            }catch (e : Exception){
+                Log.e("ERROR", "Null plane type, couldn't generate drag handle icon")
+            }
+            itemTouchHelper.attachToRecyclerView(null)
+        }
+
+        //edit mode enabled
+        else{
+            isEditMode = true
+
+            try {
+                var i = 0
+                do {
+                    var type = (rv_planes.adapter as PlanesAdapter).getItemViewType(i)
+                    when (type) {
+                        0 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_task_blocks?.background = getDrawable(R.drawable.ic_drag_handle_24)
+                        1 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_to_do_list?.background = getDrawable(R.drawable.ic_drag_handle_24)
+                        2 -> rv_planes.layoutManager!!.getChildAt(i)?.ib_title_handle_note?.background = getDrawable(R.drawable.ic_drag_handle_24)
+                    }
+                    i++
+                } while (i < rv_planes.layoutManager!!.childCount)
+            }catch (e : Exception){
+                Log.e("ERROR", "Null plane type, couldn't generate drag handle icon")
+            }
+            itemTouchHelper.attachToRecyclerView(rv_planes)
         }
     }
 

@@ -1,57 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll_task_blocks_plane"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color_panel_background"
-    android:orientation="vertical"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:layout_marginVertical="4dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_task_blocks_plane"
+        android:background="@color/color_panel_background"
+        android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center|left"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp">
+    android:layout_marginVertical="4dp"
+       >
 
         <ImageButton
-            android:layout_width="2dp"
+            android:id="@+id/ib_title_handle_task_blocks"
+            android:layout_width="wrap_content"
+            android:minWidth="2dp"
             android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:background="@color/color_on_top_primary_blue"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_task_blocks_plane_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
             android:text="Daily"
             android:textColor="?colorOnBackground"
-            android:textSize="18sp" />
-    </LinearLayout>
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_title_handle_task_blocks"
+            app:layout_constraintStart_toEndOf="@+id/ib_title_handle_task_blocks"
+            app:layout_constraintTop_toTopOf="@+id/ib_title_handle_task_blocks" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_task_blocks"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:elevation="1dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
+        android:layout_marginTop="8dp"
         android:paddingBottom="8dp"
-        android:clipToPadding = "false"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
         android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:paddingHorizontal="8dp"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_blocks_plane_name"
+        tools:listitem="@layout/item_task_block" />
 
-</LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/mi_darkmode"
-        android:icon="@drawable/ic_dark_mode"
+        android:icon="@drawable/ic_dark_mode_24"
         android:title="Dark Mode">
     </item>
 </menu>

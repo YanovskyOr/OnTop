@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.OnTop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_on_top_primary_blue</item>
-        <item name="colorPrimaryVariant">@color/color_on_top_primary_blue</item>
+        <item name="colorPrimary">@color/color_on_top_blue</item>
+        <item name="colorPrimaryVariant">@color/color_on_top_blue</item>
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorOnBackground">@color/white</item>
         <!-- Secondary brand color. -->
@@ -29,4 +29,28 @@
 <!--                <item name="android:windowContentOverlay">@null</item>-->
 
     </style>
+
+
+
+
+
+    <style name="ThemeOverlay.OnTop.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.OnTop</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.OnTop.Title.Text</item>
+        <item name="colorAccent">@color/color_on_top_blue</item>
+    </style>
+
+    <style name="MaterialAlertDialog.OnTop" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.OnTop.MediumComponent</item>
+    </style>
+
+    <style name="MaterialAlertDialog.OnTop.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ShapeAppearance.OnTop.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>

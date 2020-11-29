@@ -21,6 +21,11 @@ class TaskBlock(var taskName: String, var count: Int = 1, var color: Int = TASK_
         const val TASK_COLOR_YELLOW = R.color.color_on_top_yellow
         const val TASK_COLOR_ORANGE = R.color.color_on_top_orange
         const val TASK_COLOR_RED = R.color.color_on_top_red
+
+        const val TASK_COLOR_CYAN = R.color.color_on_top_cyan
+        const val TASK_COLOR_PINK = R.color.color_on_top_pink
+        const val TASK_COLOR_PURPLE = R.color.color_on_top_purple
+
     }
 
 

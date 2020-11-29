@@ -12,11 +12,23 @@
     <color name="color_on_top_primary_blue">#4472C4</color>
     <color name="color_on_top_primary_dark_blue">#1E478F</color>
 
-    <color name="color_on_top_blue">#B4C7E7</color>
-    <color name="color_on_top_green">#C5E0B4</color>
-    <color name="color_on_top_yellow">#FFE699</color>
-    <color name="color_on_top_orange">#F8CBAD</color>
-    <color name="color_on_top_red">#F8ADAD</color>
+<!--    <color name="color_on_top_blue">#B4C7E7</color>-->
+<!--    <color name="color_on_top_green">#C5E0B4</color>-->
+<!--    <color name="color_on_top_yellow">#FFE699</color>-->
+<!--    <color name="color_on_top_orange">#F8CBAD</color>-->
+<!--    <color name="color_on_top_red">#F8ADAD</color>-->
+
+
+    <color name="color_on_top_blue">#87BBFD</color>
+    <color name="color_on_top_cyan">#68D4F8</color>
+    <color name="color_on_top_green">#74E4A2</color>
+    <color name="color_on_top_yellow">#FCD669</color>
+    <color name="color_on_top_orange">#FDBC72</color>
+    <color name="color_on_top_red">#FFA27B</color>
+    <color name="color_on_top_pink">#F6A4EB</color>
+    <color name="color_on_top_purple">#BEB0F4</color>
+
+
 
     <color name="color_panel_background">#191919</color>
     <color name="color_darken">#19000000</color>
