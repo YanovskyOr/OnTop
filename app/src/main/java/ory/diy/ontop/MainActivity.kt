@@ -123,7 +123,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private var simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),0){
+    private var simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),ItemTouchHelper.LEFT){
+
+        //top/bottom
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             var startPosition = viewHolder.adapterPosition
             var endPosition = target.adapterPosition
@@ -133,18 +135,20 @@ class MainActivity : AppCompatActivity() {
             return true
         }
 
+        //when swiping item left
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
         }
-
     }
+
+
     private val itemTouchHelper = ItemTouchHelper(simpleCallback)
 
 
     fun getPlanesList() : ArrayList<IPlane>{
         val planesArrayList = ArrayList<IPlane>()
 
-        val taskBlocksPlane = TaskBlocksPlane("Daily", getTaskBlockList())
+        val taskBlocksPlane = TaskBlocksPlane("Daily", getBlockList())
         val notePlane = NotePlane("Extremely Important!", "Send report today!", NotePlane.NOTE_COLOR_ORANGE)
         val toDoListPlane = ToDoListPlane("Focus Today", getToDoList())
         val toDoListPlane2 = ToDoListPlane("Do Tomorrow", getToDoList2())
@@ -163,15 +167,14 @@ class MainActivity : AppCompatActivity() {
     private fun getTaskBlockList(): ArrayList<TaskBlock> {
        val taskBlockArrayList = ArrayList<TaskBlock>()
 
-        var task1 = TaskBlock("Make bed", 1, TaskBlock.TASK_COLOR_GREEN)
-        var task2 = TaskBlock("Reset Workspace", 1, TaskBlock.TASK_COLOR_YELLOW)
+        var task1 = TaskBlock("Make bed", 1, Block.BLOCK_COLOR_GREEN)
+        var task2 = TaskBlock("Reset Workspace", 1, Block.BLOCK_COLOR_YELLOW)
         var task3 = TaskBlock("Drink Water", 9)
-        var task4 = TaskBlock("Workout", 1, TaskBlock.TASK_COLOR_RED)
-        var task5 = TaskBlock("Do thing 5", 1, TaskBlock.TASK_COLOR_CYAN)
-        var task6 = TaskBlock("Do thing 6", 1, TaskBlock.TASK_COLOR_PURPLE)
-        var task7 = TaskBlock("Do multiple things", 7, TaskBlock.TASK_COLOR_PINK)
-        var task8 = TaskBlock("Do thing 8", 1, TaskBlock.TASK_COLOR_ORANGE)
-
+        var task4 = TaskBlock("Workout", 1, Block.BLOCK_COLOR_RED)
+        var task5 = TaskBlock("Do thing 5", 1, Block.BLOCK_COLOR_CYAN)
+        var task6 = TaskBlock("Do thing 6", 1, Block.BLOCK_COLOR_PURPLE)
+        var task7 = TaskBlock("Do multiple things", 7, Block.BLOCK_COLOR_PINK)
+        var task8 = TaskBlock("Do thing 8", 1, Block.BLOCK_COLOR_ORANGE)
 
 
         taskBlockArrayList.add(task1)
@@ -183,7 +186,32 @@ class MainActivity : AppCompatActivity() {
         taskBlockArrayList.add(task7)
         taskBlockArrayList.add(task8)
 
+
         return taskBlockArrayList
+    }
+
+    private fun getBlockList(): ArrayList<Block> {
+        val blockArrayList = ArrayList<Block>()
+
+        var task1 = TaskBlock("Make bed", 1, Block.BLOCK_COLOR_GREEN)
+        var task2 = TaskBlock("Reset Workspace", 1, Block.BLOCK_COLOR_YELLOW)
+        var task3 = TaskBlock("Drink Water", 9)
+        var task4 = TaskBlock("Workout", 1, Block.BLOCK_COLOR_RED)
+        var task5 = TaskBlock("Do thing 5", 1, Block.BLOCK_COLOR_CYAN)
+        var task6 = TaskBlock("Do thing 6", 1, Block.BLOCK_COLOR_PURPLE)
+        var task7 = TaskBlock("Do multiple things", 7, Block.BLOCK_COLOR_PINK)
+//        var task8 = AddBlock()
+
+        blockArrayList.add(task1)
+        blockArrayList.add(task2)
+        blockArrayList.add(task3)
+        blockArrayList.add(task4)
+        blockArrayList.add(task5)
+        blockArrayList.add(task6)
+        blockArrayList.add(task7)
+//        blockArrayList.add(task8)
+
+        return blockArrayList
     }
 
 
@@ -221,21 +249,22 @@ class MainActivity : AppCompatActivity() {
         var timeOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
         when (timeOfDay) {
-            in 0..2 -> tv_greeting.text = "Don't Stay up too late!"
+            in 0..2 -> tv_greeting.text = "Don't stay up too late!"
             in 3..4 -> tv_greeting.text = "Just... why?"
             in 5..6 -> tv_greeting.text = "Why so early???"
-            in 7..11 -> tv_greeting.text = "Good Morning :)"
-            in 12..15 -> tv_greeting.text = "Good Afternoon"
-            in 16..20 -> tv_greeting.text = "Good Evening"
-            in 21..23 -> tv_greeting.text = "Good Night"
+            in 7..11 -> tv_greeting.text = "Good morning :)"
+            in 12..15 -> tv_greeting.text = "Good afternoon"
+            in 16..20 -> tv_greeting.text = "Good evening"
+            in 21..23 -> tv_greeting.text = "Good night"
         }
     }
 
     private fun editMode(){
-        //edit mode disabled
+        //edit mode enabled -> disabled
         if(isEditMode){
             isEditMode = false
 
+            ib_edit_mode.setImageResource(R.drawable.ic_edit_24)
             try {
                 var i = 0
                 do{
@@ -253,10 +282,11 @@ class MainActivity : AppCompatActivity() {
             itemTouchHelper.attachToRecyclerView(null)
         }
 
-        //edit mode enabled
+        //edit mode disabled -> enabled
         else{
             isEditMode = true
 
+            ib_edit_mode.setImageResource(R.drawable.ic_check_24)
             try {
                 var i = 0
                 do {

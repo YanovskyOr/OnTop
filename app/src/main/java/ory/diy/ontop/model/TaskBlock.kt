@@ -3,7 +3,7 @@ package ory.diy.ontop.model
 import android.graphics.Color
 import ory.diy.ontop.R
 
-class TaskBlock(var taskName: String, var count: Int = 1, var color: Int = TASK_COLOR_BLUE){
+class TaskBlock(var taskName: String, var count: Int = 1, var color: Int = Block.BLOCK_COLOR_BLUE) : Block("Task - $taskName", type="TYPE_TASK_BLOCK") {
 
     var countDone = 0
 
@@ -14,19 +14,5 @@ class TaskBlock(var taskName: String, var count: Int = 1, var color: Int = TASK_
             countDone++
         }
     }
-
-    companion object {
-        const val TASK_COLOR_BLUE = R.color.color_on_top_blue
-        const val TASK_COLOR_GREEN = R.color.color_on_top_green
-        const val TASK_COLOR_YELLOW = R.color.color_on_top_yellow
-        const val TASK_COLOR_ORANGE = R.color.color_on_top_orange
-        const val TASK_COLOR_RED = R.color.color_on_top_red
-
-        const val TASK_COLOR_CYAN = R.color.color_on_top_cyan
-        const val TASK_COLOR_PINK = R.color.color_on_top_pink
-        const val TASK_COLOR_PURPLE = R.color.color_on_top_purple
-
-    }
-
 
 }

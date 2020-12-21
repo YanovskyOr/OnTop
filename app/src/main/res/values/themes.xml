@@ -57,4 +57,17 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+
+<!--    FAB for blocks      -->
+    <style name="ShapeAppearanceOverlayExtended" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
+        <item name="cornerSizeTopLeft">50%</item>
+        <item name="cornerSizeBottomLeft">50%</item>
+        <item name="fabCustomSize">15dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+
+    </style>
+
 </resources>
